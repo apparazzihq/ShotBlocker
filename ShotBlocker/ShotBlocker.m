@@ -150,8 +150,9 @@ static NSTimeInterval const kShotBlockerUpdateInterval = 1.0;
     }
   } failureBlock: ^(NSError *error) {
     if (self.errorBlock) {
+      __block ShotBlockerScreenshotErrorBlock errorBlock = self.errorBlock;
       dispatch_async(dispatch_get_main_queue(), ^() {
-        self.errorBlock(error);
+        errorBlock(error);
       });
     }
     else {
